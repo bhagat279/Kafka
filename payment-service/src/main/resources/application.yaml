@@ -1,0 +1,55 @@
+server:
+  port: 8082
+
+
+
+
+spring:
+
+  application:
+    name: payment-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/payment_db
+    username: root
+    password: Ravi123@
+
+  jpa:
+    show-sql: true
+
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        format_sql: true
+
+  kafka:
+
+    bootstrap-servers: localhost:9092
+
+    consumer:
+
+      group-id: payment-group
+
+      auto-offset-reset: earliest
+
+      enable-auto-commit: false
+
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+      properties:
+
+        spring.json.trusted.packages: "*"
+
+        spring.json.value.default.type: com.payment_service.event.OrderCreatedEvent
+
+logging:
+
+  level:
+
+    root: INFO
+
+    com.payment_service: DEBUG

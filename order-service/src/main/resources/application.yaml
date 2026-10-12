@@ -1,0 +1,52 @@
+server:
+  port: 8081
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+  api-docs:
+    path: /v3/api-docs
+
+spring:
+  application:
+    name: order-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/order_db
+    username: root
+    password: Ravi123@
+
+  jpa:
+    show-sql: true
+
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        format_sql: true
+
+  kafka:
+
+    bootstrap-servers:
+      localhost:9092
+
+    producer:
+
+      retries: 3
+
+      acks: all
+
+      key-serializer:
+        org.apache.kafka.common.serialization.StringSerializer
+
+      value-serializer:
+        org.springframework.kafka.support.serializer.JsonSerializer
+
+logging:
+
+  level:
+    root: INFO
+
+    com.order.orderservice: DEBUG
